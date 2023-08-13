@@ -1,4 +1,13 @@
 set -e  # 
+#!/bin/bash
+
+idea=$1
+
+if [ -z "$idea" ]; then
+    idea="Write a cli snake game"
+fi
+
+echo $idea
 
 CURR_DIR=`pwd` 
 echo $CURR_DIR
@@ -22,7 +31,7 @@ docker run --rm \
     -v $CURR_DIR/workspace:/app/metagpt/workspace \
     -v $CURR_DIR/logs:/app/metagpt/logs\
     metagpt/metagpt:v0.3.1 \
-    python startup.py "Write a cli snake game"
+    python startup.py "$idea"
     
 # archive generated workspace and log to workspace.zip
 zip -r $CURR_DIR/workspace.zip $CURR_DIR/workspace $CURR_DIR/logs 
